@@ -39,13 +39,21 @@ class Duck extends Model
 
     public static function countTheWounded()
     {
-        $result =  Duck::where('hit_points', '<', 60)
-            ->update(['status' => 'DEAD']);
-        return $result;
+        try {
+            $result =  Duck::where('hit_points', '<', 60)
+                ->update(['status' => 'DEAD']);
+            return $result;
+        } catch (QueryException $e){
+            return "Returned with error: " . $e->getMessage();
+        }
     }
+
+
 
     public static function upgradeWeapon()
     {
+        try {
+
         $result = Duck::where('equipment.weapon', '<', 5.0)
             ->orderBy('equipment.weapon', 'desc')
             ->take(10)
@@ -53,14 +61,35 @@ class Duck extends Model
             //->pluck('equipment');
         //return $result->toJson();
         return $result;
+            } catch (QueryException $e){
+            return 'Returned with error: ' . $e->getMessage();
+        }
     }
 
     public static function  upgradeArmor()
     {
-        $result = Duck::where('equipment.armor', '<', 2.0)
-            ->orderBy('equipment.armor', 'desc')
-            ->take(50000)
-            ->update(['equipment.armor' => '5.0']);
+        try {
+
+
+            $result = Duck::where('equipment.armor', '<', 2.0)
+                ->orderBy('equipment.armor', 'desc')
+                ->take(50000)
+                ->update(['equipment.armor' => '5.0']);
+            return $result;
+        } catch (QueryException $e){
+            return 'Returned with error: ' . $e->getMessage();
+        }
+    }
+
+    public static function healTheWounded()
+    {
+        try {
+            $result = Duck::where('status', 'DEAD')
+                ->update(['status' => 'ALIVE', 'hit_points' => 100]);
+        } catch (QueryException $e){
+            return "Returned with error: " . $e->getMessage();
+        }
+
     }
 
 

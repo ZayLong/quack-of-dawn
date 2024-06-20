@@ -28,7 +28,8 @@ class InsertDuckRecordsJob implements ShouldQueue
     public function handle(): void
     {
         //Duck::chunk(500,100000);
-        Duck::countTheWounded();
+        print("HEALING OUR TROOPS!");
+
 
 /*        Schema::create('ducks', function (Blueprint $table) {
 

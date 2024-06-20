@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Jobs\InsertDuckRecordsJob;
 use App\Models\Duck;
+use App\Strategies\Combat\Context\CombatStrategyContext;
+use App\Strategies\Combat\UpgradeEquipmentStrategy;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -78,7 +80,8 @@ class DuckController extends Controller
     {
         //InsertDuckRecordsJob::dispatch();
         //return Duck::countTheWounded();
-        return Duck::upgradeWeapon();
+        //return Duck::upgradeWeapon();
+        $strategy = new CombatStrategyContext(new UpgradeEquipmentStrategy());
     }
 
     /**
