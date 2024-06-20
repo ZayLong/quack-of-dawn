@@ -20,3 +20,4 @@ Route::get('/', function () {
 
 Route::get('/browse_ducks/', [DuckController::class, 'show']);
 Route::get('/update_ducks/', [DuckController::class, 'update']);
+Route::post('/create_ducks/', [DuckController::class, 'store']);

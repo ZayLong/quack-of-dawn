@@ -9,34 +9,28 @@ use App\Strategies\Combat\UpgradeEquipmentStrategy;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use function MongoDB\BSON\toJSON;
 
 class DuckController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        $data = $request->all();
-        $duck = new Duck();
-        $duck->fill($data);
-        $duck->save();
+        try {
+            $data = $request->all();
+            $duck = new Duck();
+            $duck->fill($data);
+            $duck->save();
+            InsertDuckRecordsJob::dispatch($duck);
+            return $duck->toJson();
+        }catch (QueryException $e){
+            return $e->getMessage();
+        }
+
     }
 
     /**
@@ -66,14 +60,6 @@ class DuckController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Duck $duck)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, Duck $duck)
@@ -81,7 +67,12 @@ class DuckController extends Controller
         //InsertDuckRecordsJob::dispatch();
         //return Duck::countTheWounded();
         //return Duck::upgradeWeapon();
-        $strategy = new CombatStrategyContext(new UpgradeEquipmentStrategy());
+        try {
+            $strategy = new CombatStrategyContext(new UpgradeEquipmentStrategy());
+        } catch (QueryException $e) {
+            return $e->getMessage();
+        }
+
     }
 
     /**

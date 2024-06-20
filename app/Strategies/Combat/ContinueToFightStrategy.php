@@ -10,7 +10,7 @@ use App\Strategies\Combat\Interface\CombatStrategyInterface;
 class ContinueToFightStrategy implements CombatStrategyInterface
 {
     public function executePlan(){
-        //Implement the function here
+        //agregate combat data
 
     }
 }

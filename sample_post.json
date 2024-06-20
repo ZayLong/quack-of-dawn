@@ -1,10 +1,8 @@
 {
-    "title": "The Laravel MongoDB Quick Start",
-    "year": 2024,
-    "runtime": 15,
-    "imdb": {
-        "rating": 9.5,
-        "votes": 1
-    },
-    "plot": "This movie entry was created by running through the Laravel MongoDB Quick Start tutorial."
+    "status": "ALIVE",
+    "hit_points": 300,
+    "equipment": {
+        "weapon": 9.5,
+        "armor": 1
+    }
 }
