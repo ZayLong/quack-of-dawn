@@ -11,6 +11,7 @@ class ContinueToFightStrategy implements CombatStrategyInterface
 {
     public function executePlan(){
         //agregate combat data
+        return;
 
     }
 }
