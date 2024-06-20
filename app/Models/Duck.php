@@ -49,7 +49,7 @@ class Duck extends Model
         $result = Duck::where('equipment.weapon', '<', 5.0)
             ->orderBy('equipment.weapon', 'desc')
             ->take(10)
-            ->update(['equipment.weapon' => '10.0']);
+            ->update(['equipment.weapon' => '5.0']);
             //->pluck('equipment');
         //return $result->toJson();
         return $result;
@@ -57,7 +57,10 @@ class Duck extends Model
 
     public static function  upgradeArmor()
     {
-
+        $result = Duck::where('equipment.armor', '<', 2.0)
+            ->orderBy('equipment.armor', 'desc')
+            ->take(50000)
+            ->update(['equipment.armor' => '5.0']);
     }
 
 

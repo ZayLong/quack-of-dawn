@@ -14,6 +14,6 @@ class CombatStrategyContext
     }
 
     public function executeStrategy(){
-        return $this->strategy->doSomething();
+        return $this->strategy->executePlan();
     }
 }

@@ -2,18 +2,21 @@
 
 namespace App\Strategies\Combat;
 
+use App\Models\Duck;
 use App\Strategies\Combat\Interface\CombatStrategyInterface;
 
-class CombatStrategyAlpha implements CombatStrategyInterface
+class UpgradeEquipment implements CombatStrategyInterface
 {
-    public function doSomething(){
+    public function executePlan(){
         //Implement the function here
+        Duck::upgradeWeapon();
     }
 }
 
-class CombatStrategyDelta implements CombatStrategyInterface
+class ContinueToFight implements CombatStrategyInterface
 {
-    public function doSomething(){
+    public function executePlan(){
         //Implement the function here
+
     }
 }
